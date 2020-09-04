@@ -1,5 +1,5 @@
 # Site settings
-baseURL = "https://admiring-austin-029c3f.netlify.app"
+baseURL = "https://janmoelich.netlify.app/"
 languageCode = "en-us"
 title = "Descriptive Statistics Portfolio - Jan Moelich"
 theme = "forty"
