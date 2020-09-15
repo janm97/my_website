@@ -1,0 +1,210 @@
+---
+categories:
+- ""
+- ""
+date: "2020-09-12"
+description: Analysing monthly TfL bike hires in London? TfL Bike sharing analysis
+draft: false
+image: pic14.png
+keywords: ""
+slug: blog3
+title: Excess rentals in TfL bike sharing
+---
+
+
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries,echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+```
+# Challenge 2: Excess rentals in TfL bike sharing
+
+Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following
+
+```{r, get_tfl_data, cache=TRUE}
+url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp <- tempfile(fileext = ".xlsx")))
+
+# Use read_excel to read it as dataframe
+bike0 <- read_excel(bike.temp,
+                   sheet = "Data",
+                   range = cell_cols("A:B"))
+
+# change dates to get year, month, and week
+bike <- bike0 %>% 
+  clean_names() %>% 
+  rename (bikes_hired = number_of_bicycle_hires) %>% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))
+```
+
+
+
+We can easily create a facet grid that plots bikes hired by month and year.
+
+```{r tfl_absolute_monthly_change_code}
+
+#first we need to filter our database to have only years >= 2015
+bike_filtered <- 
+  bike %>% filter(year >= 2015)
+
+#summarizing per month - we don't need the week value, only monthly
+bike_filtered <- 
+  bike_filtered %>% 
+  group_by(year,month) %>% 
+  summarize(bikes_hired = mean(bikes_hired))
+
+#now we will calculate the monthly average throughout the years and save it in a new column
+bike_filtered <- 
+  bike_filtered %>% 
+  group_by(month) %>% 
+  mutate(average_hire = mean(bikes_hired)) %>% 
+  ungroup()
+
+#calculate the change from monthly average
+bike_filtered <-
+  bike_filtered  %>% 
+  mutate(change_monthlyavg = bikes_hired - average_hire)
+
+#we will first need to interpolate the dataframe to fix graph intersections while making the ribbon
+bike_interp <- bike_filtered  %>% 
+  #splitting the dataframe - one for each year
+  split(.$year) %>% 
+  #now we will create a df of interpolated values using map
+                      #interpolated months and bikes hired
+  map_df(~data.frame(year = approx(.x$month, .x$bikes_hired, n = 80), 
+                     #interpolated months and avg hire
+                     nat = approx(.x$month, .x$average_hire, n = 80), 
+                     #label for each year
+                     year = .x$year[1],
+                     #label for each month
+                     month = .x$month[1]))
+
+#creating a vector with month names
+month_label <- c("Jan", "Feb", "Mar",
+           "Apr", "May", "Jun",
+           "Jul", "Aug","Sep", 
+           "Oce", "Nov", "Dec")
+
+#now we will plot our graph with these interpolated values
+challenge2.1 <- ggplot(bike_interp, aes(x = nat.x,y= nat.y)) +  facet_wrap(~year) +
+  geom_line(color = "#1d00f6", size = 2) +
+  geom_line(aes(nat.x, year.y), color = "black") +
+  #adding ribbons - fills area between plots
+  geom_ribbon(aes(ymin = nat.y, ymax = pmin(year.y, nat.y)), fill = "#EAB5B7" , alpha = 0.8) +
+  geom_ribbon(aes(ymin = year.y, ymax = pmin(year.y, nat.y)), fill = "#CBECCE", alpha = 0.8) +
+  #change theme
+  theme_minimal() +
+  #change our x-axis, currently it has the interpolated values
+  scale_x_continuous(breaks= c(1,2,3,4,5,6,7,8,9,10,11,12),
+        labels=month_label) +
+  #adding titles
+  labs(title = "Monthly changes in TfL bike rentals",
+       subtitle = "Change from monthly average shown in blue \nand calculated between 2015-2019",
+       caption = "Source: TfL, London Data Store",
+       y = "Bike rentals",
+       x = "") +
+  #making titles bold
+  theme(plot.title = element_text(face = "bold"),
+        axis.title = element_text(face = "bold"),
+        plot.caption = element_text(face = "bold")) +
+  theme(aspect.ratio=2/5)
+
+challenge2.1
+
+```
+
+
+```{r tfl_percentage_weekly_change_code}
+##first we need to filter our database to have only years >= 2015
+bike_filtered <-
+bike %>% filter(year >= 2015)
+
+#summarizing per week
+bike_filtered <-
+bike_filtered %>%
+group_by(year,week) %>%
+summarize(bikes_hired = mean(bikes_hired))
+
+#now we will calculate the weekly average throughout the years and save it in a new column
+bike_filtered <-
+bike_filtered %>%
+group_by(week) %>%
+mutate(weekly_average = mean(bikes_hired)) %>%
+ungroup()
+
+#calculate the change from weekly average
+bike_filtered<-
+bike_filtered %>%
+mutate(weekly_change_per = (bikes_hired - weekly_average)/weekly_average)%>%
+ 
+#make a new column "tag" to colorize shapes depending on whether change is above or below expected level
+  mutate(tags = ifelse(weekly_change_per>=0, "Above", "Below")) %>% 
+
+#make a new column "week_shade" to colorize the background.
+  mutate(week_shade = if_else(week <=13|week>=26&week<=39,"white","grey"))
+
+```
+
+```{r tfl_seperating_shapes}
+
+p_week <- ggplot(data = bike_filtered, aes(x = week, y = weekly_change_per)) +  
+geom_line()+
+  
+#separately colorize shapes to perfectly match the line
+geom_ribbon(aes(ymin = 0, ymax = pmin(0,weekly_change_per), fill = "Above"), alpha=.5) + 
+geom_ribbon(aes(ymin = weekly_change_per, ymax = pmin(0,weekly_change_per), fill = "Below"), alpha=.5)+
+facet_wrap(~year)+
+  
+#not working.we don't know how to change the format of facet titles.
+theme(strip.background = element_rect(color="black", fill="blue"))+
+  
+#colorize the background 
+geom_tile(aes(fill = week_shade),
+            width = 1, height = Inf, alpha = 0.3)+ 
+  
+#colorize all the parameters we need 
+  scale_fill_manual(values = c("red","green","grey","white"))+
+  
+#add the rugs to match the weekly change 
+  geom_rug(aes(color = tags),sides="b",alpha = .5) +
+  theme_bw()+
+  scale_x_continuous(breaks=seq(13, 53, 13))+
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1),limits = c(-0.6,0.6)) + 
+  theme(axis.ticks = element_blank())+
+  theme(legend.position = "none") + 
+  theme(panel.border = element_blank())+
+  labs(x = "week", y = "", title = "Weekly changes in TfL bike rentals", subtitle = "% change from weekly averages \ncalculated between 2015-2019", caption = "Source: TfL, London Data Store")+
+ coord_fixed(ratio = 25)
+
+
+p_week
+```

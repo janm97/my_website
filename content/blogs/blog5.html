@@ -54,43 +54,43 @@ glimpse(nyt_mask_survey)</code></pre>
 county_map %&gt;% 
   sample_n(5)</code></pre>
 <pre><code>##       long      lat  order  hole piece            group    id
-## 1  -973137 -2065957  16499 FALSE     1 0500000US02282.1 02282
-## 2  2089141  -517482 169592 FALSE     1 0500000US51001.1 51001
-## 3 -1075683   167906 105069 FALSE     1 0500000US30001.1 30001
-## 4  2040508  -473700  82166 FALSE     1 0500000US24037.1 24037
-## 5   872332 -1081238  99143 FALSE     1 0500000US28143.1 28143</code></pre>
+## 1  1105432  -896187 151894 FALSE     1 0500000US47085.1 47085
+## 2  1624295  -765227 121491 FALSE     1 0500000US37009.1 37009
+## 3  1608105  -600163 184359 FALSE     1 0500000US54081.1 54081
+## 4  1818491  -501820 176373 FALSE     1 0500000US51660.1 51660
+## 5 -1143209 -1593447  12660 FALSE     1 0500000US02185.1 02185</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id           name state census_region      pop_dens   pop_dens4
-## 1 48000             44    TX         South [  100,  500) [ 45,  118)
-## 2 13301  Warren County    GA         South [   10,   50) [ 17,   45)
-## 3 46135 Yankton County    SD       Midwest [   10,   50) [ 17,   45)
-## 4 30067    Park County    MT          West [    0,   10) [  0,   17)
-## 5 20135    Ness County    KS       Midwest [    0,   10) [  0,   17)
-##     pop_dens6   pct_black      pop female white black travel_time land_area
-## 1 [ 82,  215) [10.0,15.0) 26956958   50.3  80.3  12.4        25.0    261232
-## 2 [  9,   25) [50.0,85.3]     5520   53.0  38.1  60.3        26.7       284
-## 3 [ 25,   45) [ 2.0, 5.0)    22684   48.1  92.9   2.1        15.1       521
-## 4 [  0,    9) [ 0.0, 2.0)    15880   50.0  96.3   0.3        22.2      2803
-## 5 [  0,    9) [ 0.0, 2.0)     3105   50.0  96.9   0.7        11.3      1075
+<pre><code>##      id                name state census_region      pop_dens   pop_dens4
+## 1 37109      Lincoln County    NC         South [  100,  500) [118,71672]
+## 2 51036 Charles City County    VA         South [   10,   50) [ 17,   45)
+## 3 45059      Laurens County    SC         South [   50,  100) [ 45,  118)
+## 4 48321    Matagorda County    TX         South [   10,   50) [ 17,   45)
+## 5 27119         Polk County    MN       Midwest [   10,   50) [  0,   17)
+##     pop_dens6   pct_black   pop female white black travel_time land_area
+## 1 [215,71672] [ 5.0,10.0) 79829   50.2  91.8   5.8        29.4       298
+## 2 [ 25,   45) [25.0,50.0)  7023   51.1  42.2  47.3        35.9       183
+## 3 [ 82,  215) [25.0,50.0) 66533   51.5  71.9  25.9        24.6       714
+## 4 [ 25,   45) [10.0,15.0) 36519   50.1  83.7  11.4        22.7      1100
+## 5 [  9,   25) [ 0.0, 2.0) 31704   49.9  94.2   1.2        17.6      1971
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     51900    &lt;NA&gt;    &lt;NA&gt; 48000             NA             NA
-## 2     27796 [ 0, 5) [ 0, 4) 13301           1313            991
-## 3     52578 [ 5, 8) [ 7, 8) 46135           3301           5654
-## 4     42426 [11,54] [12,54] 30067           3521           4872
-## 5     48800 [ 0, 5) [ 0, 4) 20135            160           1216
+## 1     48940 [ 8,11) [ 8,10) 37109           9836          28653
+## 2     48428 [11,54] [12,54] 51036           2244           1381
+## 3     37383 [ 8,11) [10,12) 45059           8845          16770
+## 4     43096 [ 8,11) [ 8,10) 48321           3357           8147
+## 5     50695 [ 5, 8) [ 7, 8) 27119           4712           8979
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1               NA           NA           NA        NA           NA
-## 2             2332        0.563        0.425       322        0.605
-## 3             9616        0.343        0.588      2353        0.424
-## 4             9056        0.389        0.538      1351        0.432
-## 5             1435        0.111        0.847      1056        0.149
+## 1            39449        0.249        0.726     18817        0.301
+## 2             3745        0.599        0.369       863        0.658
+## 3            26474        0.334        0.633      7925        0.406
+## 4            11779        0.285        0.692      4790        0.328
+## 5            14698        0.321        0.611      4267        0.463
 ##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
-## 1           NA        NA    &lt;NA&gt;          &lt;NA&gt;     &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;
-## 2        0.393       535 Clinton      Democrat    Obama      Democrat      No
-## 3        0.550      1255   Trump    Republican   Romney    Republican      No
-## 4        0.537       909   Trump    Republican   Romney    Republican      No
-## 5        0.840       979   Trump    Republican   Romney    Republican      No</code></pre>
+## 1        0.689     14204   Trump    Republican   Romney    Republican      No
+## 2        0.331      1376 Clinton      Democrat    Obama      Democrat      No
+## 3        0.580      4429   Trump    Republican   Romney    Republican      No
+## 4        0.663      4054   Trump    Republican   Romney    Republican      No
+## 5        0.520       842   Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32

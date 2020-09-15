@@ -110,10 +110,10 @@ disqusShortname = ""
       url = "blogs/blog2"
 
     [[params.tiles.showcase]]
-      title = "Ipsum"
-      subtitle = "Nisl Sed Aliquam"
-      image = "pic04.jpg"
-      url = "blogs/ipsum"
+      title = "Excess rentals in TfL bike sharing"
+      subtitle = "Analysing monthly TfL bike hires in London? TfL Bike sharing analysis"
+      image = "pic14.png"
+      url = "blogs/blog3"
 
     [[params.tiles.showcase]]
       title = "Consequat"
