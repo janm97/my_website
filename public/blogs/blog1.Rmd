@@ -1,0 +1,283 @@
+---
+categories:
+- ""
+- ""
+date: "2020-09-15"
+description: Do men really earn more than women? Omega Group salary analysis
+draft: false
+image: pic12.jpg
+keywords: ""
+slug: blog1
+title: Pay Discrimination
+---
+
+
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+
+# Omega Group plc- Pay Discrimination
+
+Lets find out whether there is indeed a significant difference between the salaries of men and women, and whether the difference is due to discrimination or whether it is based on another, possibly valid, determining factor. 
+
+## Loading the data
+
+
+```{r load_omega_data}
+omega <- read_csv(here::here("data", "omega.csv"))
+glimpse(omega) # examine the data frame
+```
+
+## Relationship Salary - Gender ?
+
+The data frame `omega`  contains the salaries for the sample of 50 executives in the company. Lets look at whether we can conclude that there is a significant difference between the salaries of the male and female executives?
+
+```{r, confidence_intervals_salary_bootstrap}
+
+#calculating the salary values with 95% confidence
+salary_bootstrap_male <- omega %>% 
+  filter(gender == "male") %>% 
+  # Specify the variable of interest
+  specify(response = salary) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  # Find the mean of each sample
+  calculate(stat = "mean")
+  #get_confidence_interval(level=0.95, type="percentile")
+  
+salary_bootstrap_female <- omega %>% 
+  filter(gender == "female") %>% 
+  # Specify the variable of interest
+  specify(response = salary) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  # Find the mean of each sample
+  calculate(stat = "mean")
+  
+#calculating confidence intervals for male and female salary
+male_ci <- salary_bootstrap_male %>% 
+  get_confidence_interval(level=0.95, type="percentile")
+female_ci <- salary_bootstrap_female %>% 
+  get_confidence_interval(level=0.95, type="percentile")
+
+#adding a gender column to the bootstrapped salary data
+salary_bootstrap_female <- salary_bootstrap_female %>% 
+  mutate(gender = "female")
+salary_bootstrap_male <- salary_bootstrap_male %>% 
+  mutate(gender = "male")
+
+#combnining both dataframes 
+combined_salary_bootstrap <- rbind(salary_bootstrap_female, salary_bootstrap_male)
+  
+#plotting density of both dataframes
+ggplot(combined_salary_bootstrap) + 
+  shade_confidence_interval(male_ci, fill = "#69D4D8", color = "#69D4D8", alpha=0.3) +
+  shade_confidence_interval(female_ci, fill = "#FEA9A7", color = "#FEA9A7", alpha=0.3) +
+  geom_density(aes(x=stat, fill=gender, fill=gender), color="black", alpha = 0.3) +
+  labs(title = "On average men and women have large differences in yearly salary!", x = "Salary", y = "Density", subtitle = "95% confidence interval shaded") + 
+  theme_bw()
+
+
+```
+
+
+Lets calculate summary statistics on salary by gender.
+
+```{r, confint_single_valiables}
+# Summary Statistics of salary by gender
+mosaic::favstats (salary ~ gender, data=omega)
+
+#Calculating the confidence intervals using the formula
+formula_ci <- omega %>% 
+  group_by(gender) %>% 
+  summarise(mean_salary = mean(salary, na.rm = TRUE), 
+            sd_salary = sd(salary, na.rm = TRUE), 
+            count_salary = n(), 
+            se_salary = sd_salary/sqrt(count_salary), 
+            t_critical = qt(0.975, count_salary-1),
+            lower_salary = mean_salary - t_critical * se_salary,
+            upper_salary = mean_salary + t_critical * se_salary)
+
+formula_ci
+
+```
+
+Lets run a hypothesis test, assuming as a null hypothesis that the mean difference in salaries is zero, or that, on average, men and women make the same amount of money.
+
+```{r, hypothesis_testing_t_test}
+
+#bootsrapping 1000 samples
+set.seed(1234)
+salary_in_equal_world <- omega %>% 
+  specify(salary ~ gender) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means",
+            order = c("male", "female"))
+
+test <- t.test(salary ~ gender, data = omega)
+test
+
+
+```
+
+```{r, visualize_p_test}
+
+salary_in_equal_world %>%  visualize() + 
+  shade_p_value(obs_stat = test$p.value, direction = "two-sided") + 
+  labs(title = "Differences in salary between male and female executives in a world where there \nis really no difference", x = "Average Female - Average Male Salary", y = "Count", subtitle = "Observed differences marked in red") +
+  theme_bw()
+
+```
+
+H0: There is no significant difference in salary between genders
+H1: Mean salary between gender differs
+
+
+The extremeley low p-value of 0.000165 suggests that the probability of observing the sample mean, given that the H0 is true, is very low. Therefore this allows us to reject the H0 that there is no signficant difference in salary between genders in favor of our H1. Further support for this is the high t-value of -4, as well as the non-overlapping confidence intervals. 
+
+Therefore this hypothesis test suggests that on average salary between men and women is not distributed equally.
+
+
+## Relationship Experience - Gender?
+
+At the board meeting, someone raised the issue that there was indeed a substantial difference between male and female salaries, but that this was attributable to other reasons such as differences in experience. A questionnaire send out to the 50 executives in the sample reveals that the average experience of the men is approximately 21 years, whereas the women only have about 7 years experience on average (see table below).
+
+```{r, experience_stats}
+# Summary Statistics of salary by gender
+favstats (experience ~ gender, data=omega)
+
+```
+
+Based on this evidence, can you conclude that there is a significant difference between the experience of the male and female executives? Perform similar analyses as in the previous section. Does your conclusion validate or endanger your conclusion about the difference in male and female salaries?  
+
+
+```{r, experience_stats_self}
+
+#calculating the salary values with 95% confidence
+experience_bootstrap_male <- omega %>% 
+  filter(gender == "male") %>% 
+  # Specify the variable of interest
+  specify(response = experience) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  # Find the mean of each sample
+  calculate(stat = "mean")
+  #get_confidence_interval(level=0.95, type="percentile")
+  
+experience_bootstrap_female <- omega %>% 
+  filter(gender == "female") %>% 
+  # Specify the variable of interest
+  specify(response = experience) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  # Find the mean of each sample
+  calculate(stat = "mean")
+
+#calculating confidence intervals
+male_ci <- experience_bootstrap_male %>% 
+  get_confidence_interval(level=0.95, type="percentile")
+female_ci <- experience_bootstrap_female %>% 
+  get_confidence_interval(level=0.95, type="percentile")
+
+#adding a gender column to the bootstrapped experience data
+experience_bootstrap_female <- experience_bootstrap_female %>% 
+  mutate(gender = "female")
+experience_bootstrap_male <- experience_bootstrap_male %>% 
+  mutate(gender = "male")
+
+#combnining both dataframes 
+combined_experience_bootstrap <- rbind(experience_bootstrap_female, experience_bootstrap_male)
+  
+#plotting density of both dataframes
+ggplot(combined_experience_bootstrap) + 
+  geom_density(aes(x=stat, fill=gender, fill=gender),color="black", alpha = 0.3) +
+  shade_confidence_interval(male_ci, fill = "#69D4D8", color = "#69D4D8", alpha=0.3) +
+  shade_confidence_interval(female_ci, fill = "#FEA9A7", color = "#FEA9A7", alpha=0.3) +
+  labs(title = "On average men have more work experience than women in similar positions!", x = "Years of experience", y = "Density", subtitle = "95% confidence interval shaded") +
+  theme_bw()
+
+```
+
+
+```{r, hypothesis_testing_t_test_experience}
+
+set.seed(1234)
+salary_in_equal_world <- omega %>% 
+  specify(experience ~ gender) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means",
+            order = c("female", "male"))
+
+test <- t.test(experience ~ gender, data = omega)
+test
+
+```
+H0: There is no significant difference in experience between genders
+H1: Mean experience between gender differs
+
+
+The extremeley low p-value of 0.0000123 suggests that the probability of observing the sample mean, given that the H0 is true, is very low. Therefore this allows us to reject the H0 that there is no signficant difference in experience between genders in favor of our H1. Further support for this is the high t-value of -5, as well as the non-overlapping confidence intervals. 
+
+Therefore this hypothesis test suggests that on average experience between men and women is not distributed equally.
+
+## Relationship Salary - Experience ?
+
+Someone at the meeting argues that clearly, a more thorough analysis of the relationship between salary and experience is required before any conclusion can be drawn about whether there is any gender-based salary discrimination in the company.
+
+Analyse the relationship between salary and experience. Draw a scatterplot to visually inspect the data
+
+
+```{r, salary_exp_scatter}
+ggplot(omega, aes(x=experience, y=salary)) + 
+  geom_smooth(method = "lm", color="black") + 
+  geom_point(aes(color=gender), alpha=0.6) + 
+  annotate(x=25, y=79000, 
+         label=paste("R = ", round(cor(omega$salary, omega$experience),3)), 
+         geom="text", size=5) +
+  labs(title = "On average increased job experience leads to an increased yearly salary!", x = "Years of experience", y = "Yearly Salary", subtitle = "Correlation between yearly income and years of job experience") +
+  theme_bw()
+  
+
+```
+
+
+## Check correlations between the data
+
+Lets take a look correlation matrix to closer inspect the correlation between these variables.
+
+```{r, ggpairs}
+omega %>% 
+  select(gender, experience, salary) %>% #order variables they will appear in ggpairs()
+  ggpairs(aes(colour=gender, alpha = 0.3))+
+  theme_bw()
+```
+
+When looking at the salary vs experience scatterplot it becomes apparent that there is a strong positive correlation between these two variables. Thus suggesting that, on average, an individual having more work experience will be earning more money than those with very little experience. Logically thinking this is a reasonable trend, as one would assume individuals with more experience to be more efficient at their jobs. 
+
+An other interesting observation that can be inferred from this is the fact that the average work experience of men is much greater than that of women. Thus, this could be one the factors, leading to the lower average salary earned by female workers.
