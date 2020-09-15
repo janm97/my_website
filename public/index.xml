@@ -6,10 +6,20 @@
     <description>Recent content on Descriptive Statistics Portfolio - Jan Moelich</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://janmoelich.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pay Discrimination</title>
+      <link>https://janmoelich.netlify.app/blogs/blog1/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://janmoelich.netlify.app/blogs/blog1/</guid>
+      <description>Omega Group plc- Pay Discrimination Lets find out whether there is indeed a significant difference between the salaries of men and women, and whether the difference is due to discrimination or whether it is based on another, possibly valid, determining factor.
+Loading the data omega &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;omega.csv&amp;quot;)) glimpse(omega) # examine the data frame ## Rows: 50 ## Columns: 3 ## $ salary &amp;lt;dbl&amp;gt; 81894, 69517, 68589, 74881, 65598, 76840, 78800, 70033, 63… ## $ gender &amp;lt;chr&amp;gt; &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;male&amp;quot;, &amp;quot;m… ## $ experience &amp;lt;dbl&amp;gt; 16, 25, 15, 33, 16, 19, 32, 34, 1, 44, 7, 14, 33, 19, 24, …  Relationship Salary - Gender ?</description>
+    </item>
     
     <item>
       <title>Mask acceptance</title>
@@ -46,15 +56,6 @@
       
       <guid>https://janmoelich.netlify.app/blogs/magna/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Ipsum</title>
-      <link>https://janmoelich.netlify.app/blogs/ipsum/</link>
-      <pubDate>Tue, 31 Oct 2017 21:28:43 -0500</pubDate>
-      
-      <guid>https://janmoelich.netlify.app/blogs/ipsum/</guid>
-      <description>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</description>
     </item>
     
     <item>
