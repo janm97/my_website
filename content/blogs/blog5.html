@@ -54,43 +54,43 @@ glimpse(nyt_mask_survey)</code></pre>
 county_map %&gt;% 
   sample_n(5)</code></pre>
 <pre><code>##       long      lat  order  hole piece            group    id
-## 1 -1833809   330685 138462 FALSE     1 0500000US41057.1 41057
-## 2  1816709  -231897 139390 FALSE     1 0500000US42013.1 42013
-## 3   206373  -281626 111499 FALSE     1 0500000US31139.1 31139
-## 4  1029433 -1623839  73990 FALSE     1 0500000US22087.1 22087
-## 5  -989811  -366189 166837 FALSE     1 0500000US49029.1 49029</code></pre>
+## 1   859868 -1346686  97509 FALSE     1 0500000US28055.1 28055
+## 2 -1244878   256480  49504 FALSE     1 0500000US16049.1 16049
+## 3 -1146544   355600 107433 FALSE     1 0500000US30061.1 30061
+## 4  1036080 -1667240  73297 FALSE     1 0500000US22075.1 22075
+## 5  2003881  -836134 123119 FALSE     1 0500000US37061.1 37061</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id             name state census_region      pop_dens   pop_dens4
-## 1 29055  Crawford County    MO       Midwest [   10,   50) [ 17,   45)
-## 2 51013 Arlington County    VA         South [ 5000,71672] [118,71672]
-## 3 32021   Mineral County    NV          West [    0,   10) [  0,   17)
-## 4 24005 Baltimore County    MD         South [ 1000, 5000) [118,71672]
-## 5 08035   Douglas County    CO          West [  100,  500) [118,71672]
-##     pop_dens6   pct_black    pop female white black travel_time land_area
-## 1 [ 25,   45) [ 0.0, 2.0)  24650   50.5  97.5   0.4        28.6       743
-## 2 [215,71672] [ 5.0,10.0) 226908   49.9  77.3   8.9        27.3        26
-## 3 [  0,    9) [ 2.0, 5.0)   4500   50.8  72.2   4.6        12.6      3753
-## 4 [215,71672] [25.0,50.0) 826925   52.6  64.1  27.5        28.8       598
-## 5 [215,71672] [ 0.0, 2.0) 314638   50.4  91.6   1.4        27.7       840
-##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     35897 [ 8,11) [ 8,10) 29055           1824           7724
-## 2    103208 [ 0, 5) [ 0, 4) 51013          91879          20155
-## 3     35017 [11,54] [12,54] 32021            637           1179
-## 4     66486 [ 0, 5) [ 4, 7) 24005         189437         131009
-## 5    101591 [ 5, 8) [ 7, 8)  8035          67045         100178
-##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1             9920        0.184        0.779      5900        0.308
-## 2           119344        0.770        0.169     71724        0.692
-## 3             1997        0.319        0.590       542        0.424
-## 4           335017        0.565        0.391     58428        0.572
-## 5           182918        0.367        0.548     33133        0.360
-##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
-## 1        0.672      3483   Trump    Republican   Romney    Republican      No
-## 2        0.294     46745 Clinton      Democrat    Obama      Democrat      No
-## 3        0.531       217   Trump    Republican   Romney    Republican      No
-## 4        0.408     58047 Clinton      Democrat    Obama      Democrat      No
-## 5        0.626     39837   Trump    Republican   Romney    Republican      No</code></pre>
+<pre><code>##      id          name state census_region      pop_dens   pop_dens4   pop_dens6
+## 1 48327 Menard County    TX         South [    0,   10) [  0,   17) [  0,    9)
+## 2 20079 Harvey County    KS       Midwest [   50,  100) [ 45,  118) [ 45,   82)
+## 3 13085 Dawson County    GA         South [  100,  500) [ 45,  118) [ 82,  215)
+## 4 19089 Howard County    IA       Midwest [   10,   50) [ 17,   45) [  9,   25)
+## 5 51595  Emporia city    VA         South [  500, 1000) [118,71672] [215,71672]
+##     pct_black   pop female white black travel_time land_area hh_income su_gun4
+## 1 [ 0.0, 2.0)  2147   49.9  96.2   1.4        20.6    902.03     31215 [ 0, 5)
+## 2 [ 0.0, 2.0) 34820   50.9  94.1   1.9        17.1    539.75     50287 [ 5, 8)
+## 3 [ 0.0, 2.0) 22957   50.1  96.5   0.8        31.8    210.83     53525 [11,54]
+## 4 [ 0.0, 2.0)  9449   50.1  98.2   0.5        17.6    473.25     46429 [ 5, 8)
+## 5 [50.0,85.3]  5462   53.6  33.7  63.6        19.6      6.89     32155 [ 0, 5)
+##   su_gun6  fips votes_dem_2016 votes_gop_2016 total_votes_2016 per_dem_2016
+## 1 [ 0, 4) 48327            153            681              860        0.178
+## 2 [ 4, 7) 20079           5006           8503            14540        0.344
+## 3 [12,54] 13085           1444           9880            11680        0.124
+## 4 [ 7, 8) 19089           1674           2611             4507        0.371
+## 5 [ 0, 4) 51595           1531            792             2367        0.647
+##   per_gop_2016 diff_2016 per_dem_2012 per_gop_2012 diff_2012  winner
+## 1        0.792       528        0.201        0.784       493   Trump
+## 2        0.585      3497        0.374        0.605      3190   Trump
+## 3        0.846      8436        0.121        0.864      7602   Trump
+## 4        0.579       937        0.598        0.388       974   Trump
+## 5        0.335       739        0.666        0.329       907 Clinton
+##   partywinner16 winner12 partywinner12 flipped
+## 1    Republican   Romney    Republican      No
+## 2    Republican   Romney    Republican      No
+## 3    Republican   Romney    Republican      No
+## 4    Republican    Obama      Democrat     Yes
+## 5      Democrat    Obama      Democrat      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32

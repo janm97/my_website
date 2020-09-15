@@ -32,6 +32,16 @@ url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires
     </item>
     
     <item>
+      <title>IMDB average ratings - Spielberg v.s. Burton</title>
+      <link>https://janmoelich.netlify.app/blogs/blog4/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://janmoelich.netlify.app/blogs/blog4/</guid>
+      <description>IMDB ratings: Differences between directors Lets look at the average ratings for Steven Spielberg and Tim Burton and analyse whether they are significantly different from each other.
+movies &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;movies.csv&amp;quot;)) glimpse(movies) ## Rows: 2,961 ## Columns: 11 ## $ title &amp;lt;chr&amp;gt; &amp;quot;Avatar&amp;quot;, &amp;quot;Titanic&amp;quot;, &amp;quot;Jurassic World&amp;quot;, &amp;quot;The Aveng… ## $ genre &amp;lt;chr&amp;gt; &amp;quot;Action&amp;quot;, &amp;quot;Drama&amp;quot;, &amp;quot;Action&amp;quot;, &amp;quot;Action&amp;quot;, &amp;quot;Action&amp;quot;, … ## $ director &amp;lt;chr&amp;gt; &amp;quot;James Cameron&amp;quot;, &amp;quot;James Cameron&amp;quot;, &amp;quot;Colin Trevorro… ## $ year &amp;lt;dbl&amp;gt; 2009, 1997, 2015, 2012, 2008, 1999, 1977, 2015, 2… ## $ duration &amp;lt;dbl&amp;gt; 178, 194, 124, 173, 152, 136, 125, 141, 164, 93, … ## $ gross &amp;lt;dbl&amp;gt; 7.</description>
+    </item>
+    
+    <item>
       <title>Trump approval ratings</title>
       <link>https://janmoelich.netlify.app/blogs/blog2/</link>
       <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
@@ -48,15 +58,6 @@ url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires
       <guid>https://janmoelich.netlify.app/blogs/blog5/</guid>
       <description>NYT mask use Github source for data https://github.com/nytimes/covid-19-data/tree/master/mask-use
  Getting the data url &amp;lt;- &amp;quot;https://github.com/nytimes/covid-19-data/raw/master/mask-use/mask-use-by-county.csv&amp;quot; nyt_mask_survey &amp;lt;- read_csv(url) nyt_mask_survey &amp;lt;- nyt_mask_survey %&amp;gt;% clean_names() %&amp;gt;% mutate( mostly_yes= frequently+always, mostly_no = never+rarely, delta = mostly_yes-mostly_no ) glimpse(nyt_mask_survey) ## Rows: 3,142 ## Columns: 9 ## $ countyfp &amp;lt;chr&amp;gt; &amp;quot;01001&amp;quot;, &amp;quot;01003&amp;quot;, &amp;quot;01005&amp;quot;, &amp;quot;01007&amp;quot;, &amp;quot;01009&amp;quot;, &amp;quot;01011&amp;quot;, &amp;quot;010… ## $ never &amp;lt;dbl&amp;gt; 0.053, 0.083, 0.067, 0.020, 0.053, 0.031, 0.102, 0.152, 0.… ## $ rarely &amp;lt;dbl&amp;gt; 0.</description>
-    </item>
-    
-    <item>
-      <title>Aliquam</title>
-      <link>https://janmoelich.netlify.app/blogs/aliquam/</link>
-      <pubDate>Tue, 31 Oct 2017 22:42:51 -0500</pubDate>
-      
-      <guid>https://janmoelich.netlify.app/blogs/aliquam/</guid>
-      <description></description>
     </item>
     
   </channel>

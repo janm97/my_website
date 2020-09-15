@@ -106,7 +106,7 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Trump approval ratings"
       subtitle = "How did Trumps approval ratings change over time? Pollist survey analysis"
-      image = "ppic13.png"
+      image = "pic13.png"
       url = "blogs/blog2"
 
     [[params.tiles.showcase]]
@@ -116,9 +116,9 @@ disqusShortname = ""
       url = "blogs/blog3"
 
     [[params.tiles.showcase]]
-      title = "Consequat"
-      subtitle = "Ipsum Dolor Sit Amet"
-      image = "pic05.jpg"
+      title = "IMDB average ratings - Spielberg v.s. Burton"
+      subtitle = "Do mean IMDB rating for Steven Spielberg and Tim Burton differ? IMDB data analysis"
+      image = "pic15.png"
       url = "blogs/ipsum"
 
     [[params.tiles.showcase]]
