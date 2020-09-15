@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="MAM 2021 student living in London">
+	<meta name="author" content="Jan Mölich">
+	<meta name="generator" content="Hugo 0.74.3" />
+	<title>Trump approval ratings &middot; Descriptive Statistics Portfolio - Jan Moelich</title>
+	<!-- Stylesheets -->
+	
+	<link rel="stylesheet" href="https://janmoelich.netlify.app/css/main.css"/>
+	
+	
+
+	
+
+	<!-- Custom Fonts -->
+	<link href="https://janmoelich.netlify.app/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	
+	<link rel="shortcut icon" type="image/x-icon" href="https://janmoelich.netlify.app/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="https://janmoelich.netlify.app/favicon.ico">
+	
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/ie/html5shiv.js"></script>
+	<script src="js/ie/html5shiv.jsrespond.min.js"></script>
+	<![endif]-->
+</head>
+
+    <body>
+
+    <!-- Wrapper -->
+        <div id="wrapper">
+
+            <!-- Header -->
+    <header id="header" class="alt">
+        <a href="https://janmoelich.netlify.app/" class="logo"><strong>Portfolio</strong> <span>By Jan Mölich</span></a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+<!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            
+                <li><a href="https://janmoelich.netlify.app/">Home</a></li>
+            
+                <li><a href="https://janmoelich.netlify.app/blogs">Blogs</a></li>
+            
+
+        </ul>
+        <ul class="actions vertical">
+            
+                <li><a href="https://janmoelich.netlify.app/blogs" class="button special fit">Get Started</a></li>
+            
+            
+        </ul>
+    </nav>
+
+        <!-- Main -->
+            <div id="main" class="alt">
+
+                
+                    <section id="one">
+                        <div class="inner">
+                            <header class="major">
+                                <h1>Trump approval ratings</h1>
+                            </header>
+                            
+                                <span class="image main"><img src="/img/blogs/pic13.png" alt="" /></span>
+                            
+                            
+
+
+<div id="trumps-approval-margins" class="section level1">
+<h1>Trump’s Approval Margins</h1>
+<pre class="r"><code># Import approval polls data
+approval_polllist &lt;- read_csv(here::here(&quot;data&quot;, &#39;approval_polllist.csv&#39;))
+
+# Use `lubridate` to fix dates, as they are given as characters.
+approval_polllist_cleaned &lt;- approval_polllist %&gt;% 
+  mutate(modeldate = mdy(modeldate), startdate = mdy(startdate), enddate = mdy(enddate), createddate = mdy(createddate), timestamp = parse_date_time(timestamp, orders = &quot;hmsdmy&quot;))
+
+glimpse(approval_polllist_cleaned)</code></pre>
+<pre><code>## Rows: 14,533
+## Columns: 22
+## $ president           &lt;chr&gt; &quot;Donald Trump&quot;, &quot;Donald Trump&quot;, &quot;Donald Trump&quot;, &quot;…
+## $ subgroup            &lt;chr&gt; &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls…
+## $ modeldate           &lt;date&gt; 2020-08-29, 2020-08-29, 2020-08-29, 2020-08-29, …
+## $ startdate           &lt;date&gt; 2017-01-20, 2017-01-20, 2017-01-20, 2017-01-21, …
+## $ enddate             &lt;date&gt; 2017-01-22, 2017-01-22, 2017-01-24, 2017-01-23, …
+## $ pollster            &lt;chr&gt; &quot;Gallup&quot;, &quot;Morning Consult&quot;, &quot;Ipsos&quot;, &quot;Gallup&quot;, &quot;…
+## $ grade               &lt;chr&gt; &quot;B&quot;, &quot;B/C&quot;, &quot;B-&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C+&quot;, &quot;B-&quot;, &quot;B+&quot;, &quot;B&quot;…
+## $ samplesize          &lt;dbl&gt; 1500, 1992, 1632, 1500, 1500, 1500, 1651, 1190, 2…
+## $ population          &lt;chr&gt; &quot;a&quot;, &quot;rv&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;lv&quot;, &quot;a&quot;, &quot;rv&quot;, &quot;a&quot;, &quot;…
+## $ weight              &lt;dbl&gt; 0.262, 0.680, 0.153, 0.243, 0.227, 0.200, 0.142, …
+## $ influence           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ approve             &lt;dbl&gt; 45.0, 46.0, 42.1, 45.0, 46.0, 57.0, 42.3, 36.0, 4…
+## $ disapprove          &lt;dbl&gt; 45.0, 37.0, 45.2, 46.0, 45.0, 43.0, 45.8, 44.0, 3…
+## $ adjusted_approve    &lt;dbl&gt; 45.8, 45.3, 43.2, 45.8, 46.8, 51.6, 43.4, 37.7, 4…
+## $ adjusted_disapprove &lt;dbl&gt; 43.6, 37.8, 43.9, 44.6, 43.6, 44.4, 44.5, 42.8, 3…
+## $ multiversions       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ tracking            &lt;lgl&gt; TRUE, NA, TRUE, TRUE, TRUE, TRUE, TRUE, NA, NA, T…
+## $ url                 &lt;chr&gt; &quot;http://www.gallup.com/poll/201617/gallup-daily-t…
+## $ poll_id             &lt;dbl&gt; 49253, 49249, 49426, 49262, 49236, 49266, 49425, …
+## $ question_id         &lt;dbl&gt; 77265, 77261, 77599, 77274, 77248, 77278, 77598, …
+## $ createddate         &lt;date&gt; 2017-01-23, 2017-01-23, 2017-03-01, 2017-01-24, …
+## $ timestamp           &lt;dttm&gt; 2020-08-29 13:38:37, 2020-08-29 13:38:37, 2020-0…</code></pre>
+<div id="create-a-plot" class="section level2">
+<h2>Create a plot</h2>
+<p>What I would like you to do is to calculate the average net approval rate (approve- disapprove) for each week since he got into office. I want you plot the net approval, along with its 95% confidence interval. For this analysis I will use the <code>enddate</code>, i.e., the date the poll ended, in order to compute the weeks.</p>
+<pre class="r"><code>alpha &lt;- 0.05
+
+approval_pollist_summary &lt;- approval_polllist_cleaned %&gt;% 
+  filter(subgroup==&quot;Voters&quot;) %&gt;% 
+  mutate(week = week(enddate), year = year(enddate)) %&gt;% 
+  mutate(avg_net_approval = adjusted_approve - adjusted_disapprove, year = year(enddate)) %&gt;% 
+  group_by(week, year) %&gt;% 
+  summarise(year = year, week = week,
+            mean_approval = mean(avg_net_approval),
+            lower = mean(avg_net_approval) - qt(1- alpha/2, (n() - 1))*sd(avg_net_approval)/sqrt(n()),
+            upper = mean(avg_net_approval) + qt(1- alpha/2, (n() - 1))*sd(avg_net_approval)/sqrt(n())
+            ) %&gt;% 
+ unique(by = c(&quot;week&quot;, &quot;year&quot;)) %&gt;% 
+  arrange(year, week)
+
+trump_plot &lt;- ggplot(approval_pollist_summary, aes(x=week,y=mean_approval, color = as.factor(year))) + 
+  geom_line() + 
+  facet_wrap(~year) + 
+  geom_point() + 
+  geom_hline(yintercept=0, color = &quot;gold&quot;) +
+  geom_ribbon(aes(ymin=lower, ymax=upper), linetype=1, alpha=0.1) +
+  labs(title = &quot;Estimating Net Approval (approve-disapprove) for Donal Trump&quot;, subtitle = &quot;Weekly average polls&quot;, y = &quot;Average Net Approval (%)&quot;, x = &quot;Week of the year&quot;) + 
+  theme_bw() +
+  theme(legend.position=&quot;none&quot;) +
+  scale_color_manual(values = c(&quot;#FF736C&quot;,&quot;#7DAE00&quot;,&quot;#00BBBD&quot;,&quot;#C47EFF&quot;)) + 
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1, decimal.mark = &#39;.&#39;), 
+              breaks = c(7.5, 5, 2.5,0.0,-2.5, -5.0, -7.5, -10.0, -12.5, -15.0, -17.5, -20.0)) + 
+  scale_x_continuous(breaks = c(0, 13, 26, 39, 52))
+
+ggsave(&quot;trump_plot.png&quot;, width = 9.5, height = 4, dpi = 120)
+
+trump_plot</code></pre>
+<p><img src="/blogs/blog2_files/figure-html/trump_margins_weekly-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="compare-confidence-intervals" class="section level2">
+<h2>Compare Confidence Intervals</h2>
+<p>When looking at the interval from <code>week 15</code> (6-12 April 2020) to <code>week 34</code> (17-23 August 2020) we can see that while the average net approval is decreasing, the 95% confidence interval is growing. This could be a result of Trumps strongly debated handling of the covid crisis as well as controversial stand on the black lives matter movement loosing him followers and support. The increase in the confidence interval could also be a result of this, as well as the uncertain times right now, leading people to be more undecided and unsure about their vote.</p>
+</div>
+</div>
+
+                        </div>
+                    </section>
+            <!-- Disqus Inject -->
+                
+            </div>
+            
+        <!-- Footer -->
+            
+                <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                
+                    <li><a href="https://github.com/janm97" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/jan-moelich/" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+                
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Jan Mölich</li>
+                
+                <li>Design:  <a href="https://www.html5up.net">HTML5 UP</a></li>
+                
+            </ul>
+        </div>
+    </footer>
+
+            
+        </div>
+
+    <!-- Scripts -->
+        <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://janmoelich.netlify.app/js/jquery.min.js"></script>
+    <script src="https://janmoelich.netlify.app/js/jquery.scrolly.min.js"></script>
+    <script src="https://janmoelich.netlify.app/js/jquery.scrollex.min.js"></script>
+    <script src="https://janmoelich.netlify.app/js/skel.min.js"></script>
+    <script src="https://janmoelich.netlify.app/js/util.js"></script>
+
+    
+
+    <!-- Main JS -->
+    <script src="https://janmoelich.netlify.app/js/main.js"></script>
+
+    
+
+    
+
+    </body>
+</html>

@@ -22,6 +22,15 @@ Loading the data omega &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &
     </item>
     
     <item>
+      <title>Trump approval ratings</title>
+      <link>https://janmoelich.netlify.app/blogs/blog2/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://janmoelich.netlify.app/blogs/blog2/</guid>
+      <description>Trump’s Approval Margins # Import approval polls data approval_polllist &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;#39;approval_polllist.csv&amp;#39;)) # Use `lubridate` to fix dates, as they are given as characters. approval_polllist_cleaned &amp;lt;- approval_polllist %&amp;gt;% mutate(modeldate = mdy(modeldate), startdate = mdy(startdate), enddate = mdy(enddate), createddate = mdy(createddate), timestamp = parse_date_time(timestamp, orders = &amp;quot;hmsdmy&amp;quot;)) glimpse(approval_polllist_cleaned) ## Rows: 14,533 ## Columns: 22 ## $ president &amp;lt;chr&amp;gt; &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;, &amp;quot;Donald Trump&amp;quot;, &amp;quot;… ## $ subgroup &amp;lt;chr&amp;gt; &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All polls&amp;quot;, &amp;quot;All polls… ## $ modeldate &amp;lt;date&amp;gt; 2020-08-29, 2020-08-29, 2020-08-29, 2020-08-29, … ## $ startdate &amp;lt;date&amp;gt; 2017-01-20, 2017-01-20, 2017-01-20, 2017-01-21, … ## $ enddate &amp;lt;date&amp;gt; 2017-01-22, 2017-01-22, 2017-01-24, 2017-01-23, … ## $ pollster &amp;lt;chr&amp;gt; &amp;quot;Gallup&amp;quot;, &amp;quot;Morning Consult&amp;quot;, &amp;quot;Ipsos&amp;quot;, &amp;quot;Gallup&amp;quot;, &amp;quot;… ## $ grade &amp;lt;chr&amp;gt; &amp;quot;B&amp;quot;, &amp;quot;B/C&amp;quot;, &amp;quot;B-&amp;quot;, &amp;quot;B&amp;quot;, &amp;quot;B&amp;quot;, &amp;quot;C+&amp;quot;, &amp;quot;B-&amp;quot;, &amp;quot;B+&amp;quot;, &amp;quot;B&amp;quot;… ## $ samplesize &amp;lt;dbl&amp;gt; 1500, 1992, 1632, 1500, 1500, 1500, 1651, 1190, 2… ## $ population &amp;lt;chr&amp;gt; &amp;quot;a&amp;quot;, &amp;quot;rv&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;lv&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;rv&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;… ## $ weight &amp;lt;dbl&amp;gt; 0.</description>
+    </item>
+    
+    <item>
       <title>Mask acceptance</title>
       <link>https://janmoelich.netlify.app/blogs/blog5/</link>
       <pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate>
@@ -46,15 +55,6 @@ Loading the data omega &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &
       <pubDate>Tue, 31 Oct 2017 22:26:13 -0500</pubDate>
       
       <guid>https://janmoelich.netlify.app/blogs/tempus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Magna</title>
-      <link>https://janmoelich.netlify.app/blogs/magna/</link>
-      <pubDate>Tue, 31 Oct 2017 22:26:09 -0500</pubDate>
-      
-      <guid>https://janmoelich.netlify.app/blogs/magna/</guid>
       <description></description>
     </item>
     
