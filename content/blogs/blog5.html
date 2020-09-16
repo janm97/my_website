@@ -53,44 +53,44 @@ glimpse(nyt_mask_survey)</code></pre>
 # The id field is the FIPS code for the county
 county_map %&gt;% 
   sample_n(5)</code></pre>
-<pre><code>##      long      lat  order  hole piece            group    id
-## 1  838974  -693488  53634 FALSE     1 0500000US17133.1 17133
-## 2 1238287  -579053  55904 FALSE     1 0500000US18077.1 18077
-## 3  844648 -1332096  71600 FALSE     1 0500000US22035.1 22035
-## 4 2281944   237987  78512 FALSE     1 0500000US23031.1 23031
-## 5 -693561 -1045466 116554 FALSE     1 0500000US35006.1 35006</code></pre>
+<pre><code>##       long      lat  order  hole piece            group    id
+## 1   420535   -50852  90832 FALSE     1 0500000US27015.1 27015
+## 2 -1486392   367180 177018 FALSE     1 0500000US53005.1 53005
+## 3  -948727  -492693 167652 FALSE     1 0500000US49051.1 49051
+## 4  1434234  -334060 131539 FALSE     1 0500000US39101.1 39101
+## 5   368445 -1341313 160732 FALSE     1 0500000US48257.1 48257</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id             name state census_region      pop_dens   pop_dens4
-## 1 55001     Adams County    WI       Midwest [   10,   50) [ 17,   45)
-## 2 36037   Genesee County    NY     Northeast [  100,  500) [118,71672]
-## 3 12131    Walton County    FL         South [   50,  100) [ 45,  118)
-## 4 40065   Jackson County    OK         South [   10,   50) [ 17,   45)
-## 5 26031 Cheboygan County    MI       Midwest [   10,   50) [ 17,   45)
-##     pop_dens6   pct_black   pop female white black travel_time land_area
-## 1 [ 25,   45) [ 2.0, 5.0) 20215   46.4  94.0   3.2        28.0       646
-## 2 [ 82,  215) [ 2.0, 5.0) 59162   50.3  93.2   3.1        21.7       493
-## 3 [ 45,   82) [ 5.0,10.0) 61530   49.2  89.5   5.9        25.5      1038
-## 4 [ 25,   45) [ 5.0,10.0) 25998   50.2  84.0   8.0        13.6       803
-## 5 [ 25,   45) [ 0.0, 2.0) 25675   50.1  93.2   0.6        26.4       715
+<pre><code>##      id            name state census_region      pop_dens   pop_dens4
+## 1 45011 Barnwell County    SC         South [   10,   50) [ 17,   45)
+## 2 56045   Weston County    WY          West [    0,   10) [  0,   17)
+## 3 37035  Catawba County    NC         South [  100,  500) [118,71672]
+## 4 21045    Casey County    KY         South [   10,   50) [ 17,   45)
+## 5 22083 Richland Parish    LA         South [   10,   50) [ 17,   45)
+##     pop_dens6   pct_black    pop female white black travel_time land_area
+## 1 [ 25,   45) [25.0,50.0)  21959   52.3  53.1  44.2        25.3       548
+## 2 [  0,    9) [ 0.0, 2.0)   7201   47.6  95.3   0.6        28.6      2398
+## 3 [215,71672] [ 5.0,10.0) 154534   50.9  85.0   8.8        22.4       399
+## 4 [ 25,   45) [ 0.0, 2.0)  15891   51.3  97.7   0.7        28.7       444
+## 5 [ 25,   45) [25.0,50.0)  20740   52.0  62.6  35.9        20.3       559
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     44897 [ 8,11) [10,12) 55001           3780           5983
-## 2     49922 [ 0, 5) [ 4, 7) 36037           6946          15986
-## 3     43640 [11,54] [12,54] 12131           6861          25695
-## 4     42824 [ 5, 8) [ 7, 8) 40065           1473           5969
-## 5     38410 [ 8,11) [ 8,10) 26031           4302           8680
+## 1     35231 [ 8,11) [ 8,10) 45011           4395           4888
+## 2     55461 [11,54] [12,54] 56045            294           2898
+## 3     44332 [ 8,11) [10,12) 37035          21050          48062
+## 4     29934 [11,54] [10,12) 21045            767           5482
+## 5     36835 [ 8,11) [ 8,10) 22083           3157           6286
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1            10107        0.374        0.592      2203        0.540
-## 2            24463        0.284        0.653      9040        0.385
-## 3            33559        0.204        0.766     18834        0.234
-## 4             7806        0.189        0.765      4496        0.247
-## 5            13647        0.315        0.636      4378        0.439
+## 1             9479       0.4637        0.516       493        0.523
+## 2             3334       0.0882        0.869      2604        0.127
+## 3            71065       0.2962        0.676     27012        0.347
+## 4             6438       0.1191        0.852      4715        0.178
+## 5             9596       0.3290        0.655      3129        0.354
 ##   per_gop_2012 diff_2012 winner partywinner16 winner12 partywinner12 flipped
-## 1        0.452       894  Trump    Republican    Obama      Democrat     Yes
-## 2        0.594      4815  Trump    Republican   Romney    Republican      No
-## 3        0.754     14818  Trump    Republican   Romney    Republican      No
-## 4        0.753      4009  Trump    Republican   Romney    Republican      No
-## 5        0.548      1455  Trump    Republican   Romney    Republican      No</code></pre>
+## 1        0.470       527  Trump    Republican    Obama      Democrat     Yes
+## 2        0.849      2399  Trump    Republican   Romney    Republican      No
+## 3        0.642     20432  Trump    Republican   Romney    Republican      No
+## 4        0.805      3818  Trump    Republican   Romney    Republican      No
+## 5        0.636      3242  Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32
