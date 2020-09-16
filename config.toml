@@ -67,9 +67,9 @@ disqusShortname = ""
     #    url = "UrlOfLink"
 
     # Button Style 1
-    [[params.navigation.button1]]
-      name = "Get Started"
-      url = "blogs"
+    #[[params.navigation.button1]]
+    #  name = "Get Started"
+    #  url = "blogs"
 
     # Button Style 2
     #[[params.navigation.button2]]
@@ -119,7 +119,7 @@ disqusShortname = ""
       title = "IMDB average ratings - Spielberg v.s. Burton"
       subtitle = "Do mean IMDB rating for Steven Spielberg and Tim Burton differ? IMDB data analysis"
       image = "pic15.png"
-      url = "blogs/ipsum"
+      url = "blogs/blog4"
 
     [[params.tiles.showcase]]
       title = "Etiam"
@@ -174,9 +174,9 @@ disqusShortname = ""
     title = "Email"
     email = "jmolich.mam2021@london.edu"
 
-    #[[params.contact.phone]]
-    #title = "Phone"
-    #phone = "(000) 000-0000 x1234"
+    [[params.contact.phone]]
+    title = "Phone"
+    phone = "schedule call via email"
 
     [[params.contact.address]]
     title = "London Business School"
