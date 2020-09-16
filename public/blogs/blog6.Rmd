@@ -1,0 +1,82 @@
+---
+categories:
+- ""
+- ""
+date: "2020-09-12"
+description: Did political affiliation incluence the Brexit voting? Brexit results analysis
+draft: false
+image: pic16.png
+keywords: ""
+slug: blog6
+title: Political affiliation and Brexit votes
+---
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+
+
+# Challenge 1: Brexit plot
+
+Lets take a look at how political affiliation influenced the Brexit voting.
+
+```{r brexit_challenge_self}
+
+#importing our dataframe and assigning it to a variable
+brexit <- read_csv(here::here("data", "brexit_results.csv"))
+glimpse(brexit)
+
+#trasnforming it into a long df
+brexit_long <- gather(brexit, party, percentage, con_2015:ukip_2015, factor_key=TRUE)
+
+#building our graph with ggplot
+challenge1 <- ggplot(brexit_long, aes(x = percentage ,y=leave_share, color = party))+
+  geom_point(size = 2, alpha = 0.5) +
+  geom_smooth(method = lm) +
+  #adding titles to the graph/axis
+  theme(legend.position = "bottom", legend.direction = "horizontal") +
+  labs(title = "How political affiliation translated to brexit Voting", 
+    x = "Party % in the UK 2015 general election", 
+    y = "Leave % in the 2016 Brexit referendum") +
+  #defining the limits of the x axis
+  scale_x_discrete(expand=c(0.05,0.05),limits=c(0 ,20, 40, 60, 80))+
+  #changing legend (color, name and labels)
+  scale_color_manual(values = c("#0087DC","#DC241f","#FDBB30","#EFE600"),name = "", labels = c("Conservative", "Labour", "Lib Dems", "UKIP") )+ 
+  #changing theme aspects
+  theme_bw() +
+  theme(legend.position="bottom", 
+        plot.title = element_text(face = "bold"),
+        aspect.ratio=2/3.8,
+        text = element_text(size=17)) 
+
+
+challenge1
+```

@@ -122,10 +122,10 @@ disqusShortname = ""
       url = "blogs/blog4"
 
     [[params.tiles.showcase]]
-      title = "Etiam"
-      subtitle = "Feugiat Amet Tempus"
-      image = "pic06.jpg"
-      url = "blogs/ipsum"
+      title = "Political affiliation and Brexit votes"
+      subtitle = "Did political affiliation incluence the Brexit voting? Brexit results analysis"
+      image = "pic16.jpg"
+      url = "blogs/blog6"
     # You can make more showcases by copy and pasting the code above
 
   [params.blog]
@@ -136,16 +136,12 @@ disqusShortname = ""
     # To add more blogs just copy and paste the code.
 
   # Section Type Two
-  [params.two]
-    enable = true
-    title = "Massa libero"
-    subtitle = """Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. 
-    Mauris aliquet magna magna sed nunc rhoncus pharetra. 
-    Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. 
-    Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero.
-    Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus."""
-    buttonText = "Get Started"
-    url = "blogs"
+  #[params.two]
+    #enable = true
+    #title = "About me"
+    #subtitle = """"""    
+    #buttonText = "Get Started"
+    #url = "blogs"
 
 
   # Contact section
@@ -176,7 +172,7 @@ disqusShortname = ""
 
     [[params.contact.phone]]
     title = "Phone"
-    phone = "schedule call via email"
+    phone = "Schedule call via email"
 
     [[params.contact.address]]
     title = "London Business School"

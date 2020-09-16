@@ -1,0 +1,61 @@
+---
+categories:
+- ""
+- ""
+date: "2020-09-12"
+description: Did political affiliation incluence the Brexit voting? Brexit results analysis
+draft: false
+image: pic16.png
+keywords: ""
+slug: blog6
+title: Political affiliation and Brexit votes
+---
+
+
+
+<div id="challenge-1-brexit-plot" class="section level1">
+<h1>Challenge 1: Brexit plot</h1>
+<p>Lets take a look at how political affiliation influenced the Brexit voting.</p>
+<pre class="r"><code>#importing our dataframe and assigning it to a variable
+brexit &lt;- read_csv(here::here(&quot;data&quot;, &quot;brexit_results.csv&quot;))
+glimpse(brexit)</code></pre>
+<pre><code>## Rows: 632
+## Columns: 11
+## $ Seat        &lt;chr&gt; &quot;Aldershot&quot;, &quot;Aldridge-Brownhills&quot;, &quot;Altrincham and Sale …
+## $ con_2015    &lt;dbl&gt; 50.6, 52.0, 53.0, 44.0, 60.8, 22.4, 52.5, 22.1, 50.7, 53.…
+## $ lab_2015    &lt;dbl&gt; 18.3, 22.4, 26.7, 34.8, 11.2, 41.0, 18.4, 49.8, 15.1, 21.…
+## $ ld_2015     &lt;dbl&gt; 8.82, 3.37, 8.38, 2.98, 7.19, 14.83, 5.98, 2.42, 10.62, 5…
+## $ ukip_2015   &lt;dbl&gt; 17.87, 19.62, 8.01, 15.89, 14.44, 21.41, 18.82, 21.76, 19…
+## $ leave_share &lt;dbl&gt; 57.9, 67.8, 38.6, 65.3, 49.7, 70.5, 59.9, 61.8, 51.8, 50.…
+## $ born_in_uk  &lt;dbl&gt; 83.1, 96.1, 90.5, 97.3, 93.3, 97.0, 90.5, 90.7, 87.0, 88.…
+## $ male        &lt;dbl&gt; 49.9, 48.9, 48.9, 49.2, 48.0, 49.2, 48.5, 49.2, 49.5, 49.…
+## $ unemployed  &lt;dbl&gt; 3.64, 4.55, 3.04, 4.26, 2.47, 4.74, 3.69, 5.11, 3.39, 2.9…
+## $ degree      &lt;dbl&gt; 13.87, 9.97, 28.60, 9.34, 18.78, 6.09, 13.12, 7.90, 17.80…
+## $ age_18to24  &lt;dbl&gt; 9.41, 7.33, 6.44, 7.75, 5.73, 8.21, 7.82, 8.94, 7.56, 7.6…</code></pre>
+<pre class="r"><code>#trasnforming it into a long df
+brexit_long &lt;- gather(brexit, party, percentage, con_2015:ukip_2015, factor_key=TRUE)
+
+#building our graph with ggplot
+challenge1 &lt;- ggplot(brexit_long, aes(x = percentage ,y=leave_share, color = party))+
+  geom_point(size = 2, alpha = 0.5) +
+  geom_smooth(method = lm) +
+  #adding titles to the graph/axis
+  theme(legend.position = &quot;bottom&quot;, legend.direction = &quot;horizontal&quot;) +
+  labs(title = &quot;How political affiliation translated to brexit Voting&quot;, 
+    x = &quot;Party % in the UK 2015 general election&quot;, 
+    y = &quot;Leave % in the 2016 Brexit referendum&quot;) +
+  #defining the limits of the x axis
+  scale_x_discrete(expand=c(0.05,0.05),limits=c(0 ,20, 40, 60, 80))+
+  #changing legend (color, name and labels)
+  scale_color_manual(values = c(&quot;#0087DC&quot;,&quot;#DC241f&quot;,&quot;#FDBB30&quot;,&quot;#EFE600&quot;),name = &quot;&quot;, labels = c(&quot;Conservative&quot;, &quot;Labour&quot;, &quot;Lib Dems&quot;, &quot;UKIP&quot;) )+ 
+  #changing theme aspects
+  theme_bw() +
+  theme(legend.position=&quot;bottom&quot;, 
+        plot.title = element_text(face = &quot;bold&quot;),
+        aspect.ratio=2/3.8,
+        text = element_text(size=17)) 
+
+
+challenge1</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/brexit_challenge_self-1.png" width="648" style="display: block; margin: auto;" /></p>
+</div>

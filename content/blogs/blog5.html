@@ -53,44 +53,44 @@ glimpse(nyt_mask_survey)</code></pre>
 # The id field is the FIPS code for the county
 county_map %&gt;% 
   sample_n(5)</code></pre>
-<pre><code>##       long      lat  order  hole piece            group    id
-## 1   859868 -1346686  97509 FALSE     1 0500000US28055.1 28055
-## 2 -1244878   256480  49504 FALSE     1 0500000US16049.1 16049
-## 3 -1146544   355600 107433 FALSE     1 0500000US30061.1 30061
-## 4  1036080 -1667240  73297 FALSE     1 0500000US22075.1 22075
-## 5  2003881  -836134 123119 FALSE     1 0500000US37061.1 37061</code></pre>
+<pre><code>##      long      lat  order  hole piece            group    id
+## 1  838974  -693488  53634 FALSE     1 0500000US17133.1 17133
+## 2 1238287  -579053  55904 FALSE     1 0500000US18077.1 18077
+## 3  844648 -1332096  71600 FALSE     1 0500000US22035.1 22035
+## 4 2281944   237987  78512 FALSE     1 0500000US23031.1 23031
+## 5 -693561 -1045466 116554 FALSE     1 0500000US35006.1 35006</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id          name state census_region      pop_dens   pop_dens4   pop_dens6
-## 1 48327 Menard County    TX         South [    0,   10) [  0,   17) [  0,    9)
-## 2 20079 Harvey County    KS       Midwest [   50,  100) [ 45,  118) [ 45,   82)
-## 3 13085 Dawson County    GA         South [  100,  500) [ 45,  118) [ 82,  215)
-## 4 19089 Howard County    IA       Midwest [   10,   50) [ 17,   45) [  9,   25)
-## 5 51595  Emporia city    VA         South [  500, 1000) [118,71672] [215,71672]
-##     pct_black   pop female white black travel_time land_area hh_income su_gun4
-## 1 [ 0.0, 2.0)  2147   49.9  96.2   1.4        20.6    902.03     31215 [ 0, 5)
-## 2 [ 0.0, 2.0) 34820   50.9  94.1   1.9        17.1    539.75     50287 [ 5, 8)
-## 3 [ 0.0, 2.0) 22957   50.1  96.5   0.8        31.8    210.83     53525 [11,54]
-## 4 [ 0.0, 2.0)  9449   50.1  98.2   0.5        17.6    473.25     46429 [ 5, 8)
-## 5 [50.0,85.3]  5462   53.6  33.7  63.6        19.6      6.89     32155 [ 0, 5)
-##   su_gun6  fips votes_dem_2016 votes_gop_2016 total_votes_2016 per_dem_2016
-## 1 [ 0, 4) 48327            153            681              860        0.178
-## 2 [ 4, 7) 20079           5006           8503            14540        0.344
-## 3 [12,54] 13085           1444           9880            11680        0.124
-## 4 [ 7, 8) 19089           1674           2611             4507        0.371
-## 5 [ 0, 4) 51595           1531            792             2367        0.647
-##   per_gop_2016 diff_2016 per_dem_2012 per_gop_2012 diff_2012  winner
-## 1        0.792       528        0.201        0.784       493   Trump
-## 2        0.585      3497        0.374        0.605      3190   Trump
-## 3        0.846      8436        0.121        0.864      7602   Trump
-## 4        0.579       937        0.598        0.388       974   Trump
-## 5        0.335       739        0.666        0.329       907 Clinton
-##   partywinner16 winner12 partywinner12 flipped
-## 1    Republican   Romney    Republican      No
-## 2    Republican   Romney    Republican      No
-## 3    Republican   Romney    Republican      No
-## 4    Republican    Obama      Democrat     Yes
-## 5      Democrat    Obama      Democrat      No</code></pre>
+<pre><code>##      id             name state census_region      pop_dens   pop_dens4
+## 1 55001     Adams County    WI       Midwest [   10,   50) [ 17,   45)
+## 2 36037   Genesee County    NY     Northeast [  100,  500) [118,71672]
+## 3 12131    Walton County    FL         South [   50,  100) [ 45,  118)
+## 4 40065   Jackson County    OK         South [   10,   50) [ 17,   45)
+## 5 26031 Cheboygan County    MI       Midwest [   10,   50) [ 17,   45)
+##     pop_dens6   pct_black   pop female white black travel_time land_area
+## 1 [ 25,   45) [ 2.0, 5.0) 20215   46.4  94.0   3.2        28.0       646
+## 2 [ 82,  215) [ 2.0, 5.0) 59162   50.3  93.2   3.1        21.7       493
+## 3 [ 45,   82) [ 5.0,10.0) 61530   49.2  89.5   5.9        25.5      1038
+## 4 [ 25,   45) [ 5.0,10.0) 25998   50.2  84.0   8.0        13.6       803
+## 5 [ 25,   45) [ 0.0, 2.0) 25675   50.1  93.2   0.6        26.4       715
+##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
+## 1     44897 [ 8,11) [10,12) 55001           3780           5983
+## 2     49922 [ 0, 5) [ 4, 7) 36037           6946          15986
+## 3     43640 [11,54] [12,54] 12131           6861          25695
+## 4     42824 [ 5, 8) [ 7, 8) 40065           1473           5969
+## 5     38410 [ 8,11) [ 8,10) 26031           4302           8680
+##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
+## 1            10107        0.374        0.592      2203        0.540
+## 2            24463        0.284        0.653      9040        0.385
+## 3            33559        0.204        0.766     18834        0.234
+## 4             7806        0.189        0.765      4496        0.247
+## 5            13647        0.315        0.636      4378        0.439
+##   per_gop_2012 diff_2012 winner partywinner16 winner12 partywinner12 flipped
+## 1        0.452       894  Trump    Republican    Obama      Democrat     Yes
+## 2        0.594      4815  Trump    Republican   Romney    Republican      No
+## 3        0.754     14818  Trump    Republican   Romney    Republican      No
+## 4        0.753      4009  Trump    Republican   Romney    Republican      No
+## 5        0.548      1455  Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32
