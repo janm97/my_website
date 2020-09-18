@@ -53,44 +53,44 @@ glimpse(nyt_mask_survey)</code></pre>
 # The id field is the FIPS code for the county
 county_map %&gt;% 
   sample_n(5)</code></pre>
-<pre><code>##       long      lat  order  hole piece            group    id
-## 1  2102319    98595 120197 FALSE     1 0500000US36091.1 36091
-## 2  1599221  -816692 124903 FALSE     1 0500000US37121.1 37121
-## 3   944434    24176 186195 FALSE     1 0500000US55009.1 55009
-## 4 -1159109  -234151 112594 FALSE     1 0500000US32007.1 32007
-## 5  1186845 -1473796     63 FALSE     1 0500000US01003.1 01003</code></pre>
+<pre><code>##       long     lat  order  hole piece            group    id
+## 1 -1504478  472780 177601 FALSE     1 0500000US53017.1 53017
+## 2   212690  365646 129629 FALSE     1 0500000US38099.1 38099
+## 3   776463 -934189  21343 FALSE     1 0500000US05075.1 05075
+## 4   591104  -43082  95175 FALSE     1 0500000US27157.1 27157
+## 5  -434379 -549504  29859 FALSE     1 0500000US08013.1 08013</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id            name state census_region      pop_dens   pop_dens4
-## 1 29201    Scott County    MO       Midwest [   50,  100) [ 45,  118)
-## 2 01095 Marshall County    AL         South [  100,  500) [118,71672]
-## 3 16047  Gooding County    ID          West [   10,   50) [ 17,   45)
-## 4 29195   Saline County    MO       Midwest [   10,   50) [ 17,   45)
-## 5 18105   Monroe County    IN       Midwest [  100,  500) [118,71672]
+<pre><code>##      id                 name state census_region      pop_dens   pop_dens4
+## 1 47171        Unicoi County    TN         South [   50,  100) [ 45,  118)
+## 2 11001 District of Columbia    DC         South [ 5000,71672] [118,71672]
+## 3 37149          Polk County    NC         South [   50,  100) [ 45,  118)
+## 4 21169      Metcalfe County    KY         South [   10,   50) [ 17,   45)
+## 5 38003        Barnes County    ND       Midwest [    0,   10) [  0,   17)
 ##     pop_dens6   pct_black    pop female white black travel_time land_area
-## 1 [ 82,  215) [10.0,15.0)  38903   51.4  85.9  11.7        19.2       420
-## 2 [ 82,  215) [ 2.0, 5.0)  94636   50.9  94.0   2.3        23.9       566
-## 3 [  9,   25) [ 0.0, 2.0)  15064   48.7  94.9   0.5        18.8       729
-## 4 [ 25,   45) [ 5.0,10.0)  23347   50.4  89.7   5.5        17.8       756
-## 5 [215,71672] [ 2.0, 5.0) 143339   50.3  87.8   3.5        18.2       395
+## 1 [ 82,  215) [ 0.0, 2.0)  17963   50.8  98.0   0.4        22.0       186
+## 2 [215,71672] [25.0,50.0) 658893   52.6  43.4  49.5        29.7        61
+## 3 [ 82,  215) [ 2.0, 5.0)  20357   52.2  93.0   4.5        24.9       238
+## 4 [ 25,   45) [ 0.0, 2.0)   9990   50.7  96.9   1.8        22.7       290
+## 5 [  0,    9) [ 0.0, 2.0)  11144   49.8  95.1   1.3        17.2      1492
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     40651 [ 5, 8) [ 7, 8) 29201           3574          13168
-## 2     39526 [ 8,11) [10,12)  1095           4913          29217
-## 3     37050 [ 5, 8) [ 7, 8) 16047            930           3743
-## 4     39519 [ 5, 8) [ 7, 8) 29195           2787           5977
-## 5     40052 [ 0, 5) [ 4, 7) 18105          34183          20527
+## 1     32292 [11,54] [12,54] 47171           1260           5666
+## 2     65830 [ 0, 5) [ 0, 4) 11001         260223          11553
+## 3     44745 [11,54] [12,54] 37149           3715           6738
+## 4     31750 [11,54] [12,54] 21169            976           3491
+## 5     50274 [ 8,11) [10,12) 38003           1597           3156
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1            17244        0.207        0.764      9594        0.301
-## 2            34965        0.141        0.836     24304        0.193
-## 3             5191        0.179        0.721      2813        0.251
-## 4             9245        0.301        0.647      3190        0.416
-## 5            57623        0.593        0.356     13656        0.569
+## 1             7166        0.176       0.7907      4406        0.270
+## 2           280272        0.928       0.0412    248670        0.914
+## 3            10723        0.346       0.6284      3023        0.387
+## 4             4616        0.211       0.7563      2515        0.341
+## 5             5253        0.304       0.6008      1559        0.437
 ##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
-## 1        0.684      6501   Trump    Republican   Romney    Republican      No
-## 2        0.794     19514   Trump    Republican   Romney    Republican      No
-## 3        0.722      2409   Trump    Republican   Romney    Republican      No
-## 4        0.560      1311   Trump    Republican   Romney    Republican      No
-## 5        0.404      6631 Clinton      Democrat    Obama      Democrat      No</code></pre>
+## 1       0.7104      3119   Trump    Republican   Romney    Republican      No
+## 2       0.0712    204995 Clinton      Democrat    Obama      Democrat      No
+## 3       0.6024      2219   Trump    Republican   Romney    Republican      No
+## 4       0.6396      1251   Trump    Republican   Romney    Republican      No
+## 5       0.5398       564   Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32

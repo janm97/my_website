@@ -92,10 +92,10 @@ disqusShortname = ""
     # Display your showcases here.
     
     [[params.tiles.showcase]]
-      title = "NYT Masks"
-      subtitle = "How does mask use acceptance vary in the US?"
-      image = "pic11.jpg"
-      url = "blogs/blog5"
+      title = "Excess rentals in TfL bike sharing"
+      subtitle = "Analysing monthly TfL bike hires in London? TfL Bike sharing analysis"
+      image = "pic14.png"
+      url = "blogs/blog3"
 
     [[params.tiles.showcase]]
       title = "Pay Discrimination"
@@ -110,10 +110,10 @@ disqusShortname = ""
       url = "blogs/blog2"
 
     [[params.tiles.showcase]]
-      title = "Excess rentals in TfL bike sharing"
-      subtitle = "Analysing monthly TfL bike hires in London? TfL Bike sharing analysis"
-      image = "pic14.png"
-      url = "blogs/blog3"
+      title = "NYT Masks"
+      subtitle = "How does mask use acceptance vary in the US?"
+      image = "pic11.jpg"
+      url = "blogs/blog5"
 
     [[params.tiles.showcase]]
       title = "IMDB average ratings - Spielberg v.s. Burton"
